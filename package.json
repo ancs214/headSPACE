@@ -1,0 +1,24 @@
+{
+  "name": "headspace",
+  "version": "1.0.0",
+  "description": "Open space for thoughts and thoughts and thoughts...",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ancs214/headSPACE.git"
+  },
+  "author": "Ashley-Noel Swarn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ancs214/headSPACE/issues"
+  },
+  "homepage": "https://github.com/ancs214/headSPACE#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.5"
+  }
+}
