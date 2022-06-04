@@ -1,8 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
+
 
 //USER SCHEMA
 const UserSchema = new Schema({
+    // userID: {
+    //     type: Schema.Types.ObjectId,
+    //     default: () => new Types.ObjectId() 
+    // },
     username: {
         type: String,
         required: 'You must provide a username',
@@ -24,9 +29,11 @@ const UserSchema = new Schema({
     friends: [],
     _id: false 
 },
+
     {
         toJSON: {
-            virtuals: true
+            virtuals: true,
+            getters: true
         }
     }
 );
