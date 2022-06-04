@@ -1,8 +1,21 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
+
+//FRIEND SCHEMA
+const FriendSchema = new Schema (
+    {
+        friendId: {
+            type: Array 
+        }
+    }
+)
 
 //USER SCHEMA
 const UserSchema = new Schema({
+    // userId: {
+    //     type: Schema.Types.ObjectId,
+    //     default: () => new Types.ObjectId()
+    // },
     username: {
         type: String,
         required: 'You must provide a username',
@@ -21,11 +34,7 @@ const UserSchema = new Schema({
             ref: 'Thought'
         }
     ],
-    friends: [
-        {
-            type: Schema.Types.ObjectId, ref: 'User'
-        }
-    ],
+    friends: [FriendSchema],
 },
     {
         toJSON: {
