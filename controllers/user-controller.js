@@ -27,15 +27,7 @@ const userController = {
                 select: '-__v'
             })
             .select('-__v')
-            //sort in DESC order by id value
-            .sort({ _id: -1 })
-            .then(userData => {
-                if (!userData) {
-                    res.status(404).json({ message: 'No user found with this id!' });
-                    return;
-                }
-                res.json(userData);
-            })
+            .then(userData => res.json(userData))
             .catch(err => {
                 console.log(err);
                 res.status(400).json(err);
