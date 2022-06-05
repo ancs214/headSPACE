@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         type: String,
         required: 'You must provide an email',
         unique: true,
-        match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
+        match: [/^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
     },
     thoughts: [
         {
@@ -31,7 +31,6 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId, ref: 'User'
         }
     ],
-    _id: false
 },
 
     {
