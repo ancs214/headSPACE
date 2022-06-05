@@ -69,14 +69,42 @@ const thoughtController = {
     //DELETE A THOUGHT   -   api/thoughts/:thought_id
     deleteThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.id })
-        .then(userData => {
-            if (!userData) {
+        .then(thoughtData => {
+            if (!thoughtData) {
                 res.status(404).json({ message: 'No thought found with this id!' });
                 return;
             }
-            res.json(userData)
+            res.json(thoughtData)
         })
         .catch(err => res.status(400).json(err));
+    },
+
+    //POST A REACTION TO A THOUGHT   -   api/thoughts/:thoughtId/reactions
+    postReaction({ params, body }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.id }, 
+            {$push: { reactions: body } },
+            { new: true, runValidators: true }
+            )
+            .then(thoughtData => {
+                if(!thoughtData) {
+                    res.status(404).json({ message: 'No thought found with this id!'});
+                    return;
+                }
+                res.json(thoughtData)
+            })
+            .catch(err => res.status(400).json(err));
+    },
+
+    //DELETE A REACTION   -   api/thoughts/:thoughtId/reactions/:reactionId
+    deleteReaction({ params }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.id },
+            { $pull: { reactions: { reactionId: params.reactionId } } },
+            { new: true }
+        )
+        .then(thoughtData => res.json(thoughtData))
+        .catch(err => res.json(err));
     }
 
 }
