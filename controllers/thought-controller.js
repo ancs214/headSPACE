@@ -17,7 +17,7 @@ const thoughtController = {
             });
     },
 
-    //GET A SINGLE THOUGHT BY ID   -   api/thoughts/:id
+    //GET A SINGLE THOUGHT BY ID   -   api/thoughts/:thought_id
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
         .populate({
@@ -32,7 +32,7 @@ const thoughtController = {
         });
     },
 
-    //CREATE NEW THOUGHT   -   api/thoughts/:id   -   thoughtText, username, userId
+    //CREATE NEW THOUGHT   -   api/thoughts/:thought_id   -   thoughtText, username
     addThought({ params, body }, res) {
         console.log(body);
         Thought.create(body)
@@ -51,6 +51,32 @@ const thoughtController = {
             res.json(thoughtData);
           })
           .catch(err => res.json(err));
+    },
+
+    //UPDATE A THOUGHT   -   api/thoughts/:thought_id  
+    updateThought({ params, body }, res) {
+        Thought.findOneAndUpdate({ _id: params.id }, body, { new: true })
+        .then(thoughtData => {
+            if(!thoughtData) {
+                res.status(404).json({ message: 'No thought found with this id!'});
+                return;
+            }
+            res.json(thoughtData);
+        })
+        .catch(err => res.status(400).json(err));
+    },
+
+    //DELETE A THOUGHT   -   api/thoughts/:thought_id
+    deleteThought({ params }, res) {
+        Thought.findOneAndDelete({ _id: params.id })
+        .then(userData => {
+            if (!userData) {
+                res.status(404).json({ message: 'No thought found with this id!' });
+                return;
+            }
+            res.json(userData)
+        })
+        .catch(err => res.status(400).json(err));
     }
 
 }
