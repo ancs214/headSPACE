@@ -4,10 +4,6 @@ const dateFormat = require('../utils/dateFormat');
 
 //USER SCHEMA
 const UserSchema = new Schema({
-    // userID: {
-    //     type: Schema.Types.ObjectId,
-    //     default: () => new Types.ObjectId() 
-    // },
     username: {
         type: String,
         required: 'You must provide a username',
@@ -29,7 +25,7 @@ const UserSchema = new Schema({
     friends: [
         {
             type: Schema.Types.ObjectId, ref: 'User'
-        }
+        },
     ],
 },
 
